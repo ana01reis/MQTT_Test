@@ -19,3 +19,4 @@ C:\Users\ana\Documents\Git-projects\EqnFleetMQTTTest\bin\Debug\net9.0\Newtonsoft
 C:\Users\ana\Documents\Git-projects\EqnFleetMQTTTest\bin\Debug\net9.0\Serilog.dll
 C:\Users\ana\Documents\Git-projects\EqnFleetMQTTTest\bin\Debug\net9.0\Serilog.Sinks.Console.dll
 C:\Users\ana\Documents\Git-projects\EqnFleetMQTTTest\obj\Debug\net9.0\EqnFleet.BA2B0D6F.Up2Date
+C:\Users\ana\Documents\Git-projects\EqnFleetMQTTTest\obj\Debug\net9.0\EqnFleetMQTTTest.sourcelink.json
