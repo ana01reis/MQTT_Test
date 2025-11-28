@@ -1,0 +1,111 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "EqnFleetMQTTTest/1.0.0": {
+        "dependencies": {
+          "MQTTnet": "3.0.16",
+          "MQTTnet.Extensions.ManagedClient": "3.0.16",
+          "Newtonsoft.Json": "13.0.4",
+          "Serilog": "4.3.0",
+          "Serilog.Sinks.Console": "6.1.1"
+        },
+        "runtime": {
+          "EqnFleetMQTTTest.dll": {}
+        }
+      },
+      "MQTTnet/3.0.16": {
+        "runtime": {
+          "lib/net5.0/MQTTnet.dll": {
+            "assemblyVersion": "3.0.16.0",
+            "fileVersion": "3.0.16.0"
+          }
+        }
+      },
+      "MQTTnet.Extensions.ManagedClient/3.0.16": {
+        "dependencies": {
+          "MQTTnet": "3.0.16"
+        },
+        "runtime": {
+          "lib/net5.0/MQTTnet.Extensions.ManagedClient.dll": {
+            "assemblyVersion": "3.0.16.0",
+            "fileVersion": "3.0.16.0"
+          }
+        }
+      },
+      "Newtonsoft.Json/13.0.4": {
+        "runtime": {
+          "lib/net6.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "13.0.0.0",
+            "fileVersion": "13.0.4.30916"
+          }
+        }
+      },
+      "Serilog/4.3.0": {
+        "runtime": {
+          "lib/net9.0/Serilog.dll": {
+            "assemblyVersion": "4.3.0.0",
+            "fileVersion": "4.3.0.0"
+          }
+        }
+      },
+      "Serilog.Sinks.Console/6.1.1": {
+        "dependencies": {
+          "Serilog": "4.3.0"
+        },
+        "runtime": {
+          "lib/net8.0/Serilog.Sinks.Console.dll": {
+            "assemblyVersion": "6.1.1.0",
+            "fileVersion": "6.1.1.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "EqnFleetMQTTTest/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MQTTnet/3.0.16": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-xzqmKwVjTpT/X5zoLuhBCHmYVSRAlxeXqExvHLqfbt5OfTHfrD/q62IteJbOtlNG/SepeRpm76dYUZSU5o8y1A==",
+      "path": "mqttnet/3.0.16",
+      "hashPath": "mqttnet.3.0.16.nupkg.sha512"
+    },
+    "MQTTnet.Extensions.ManagedClient/3.0.16": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-rjtHYtYf+1JNLksZrKp2dvgT5pYe5+XTAoF8koRlK3s+kkUFykSecSleH7QCTaaPWCy8N7xoTSXS1v94pYGzhw==",
+      "path": "mqttnet.extensions.managedclient/3.0.16",
+      "hashPath": "mqttnet.extensions.managedclient.3.0.16.nupkg.sha512"
+    },
+    "Newtonsoft.Json/13.0.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pdgNNMai3zv51W5aq268sujXUyx7SNdE2bj1wZcWjAQrKMFZV260lbqYop1d2GM67JI1huLRwxo9ZqnfF/lC6A==",
+      "path": "newtonsoft.json/13.0.4",
+      "hashPath": "newtonsoft.json.13.0.4.nupkg.sha512"
+    },
+    "Serilog/4.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-+cDryFR0GRhsGOnZSKwaDzRRl4MupvJ42FhCE4zhQRVanX0Jpg6WuCBk59OVhVDPmab1bB+nRykAnykYELA9qQ==",
+      "path": "serilog/4.3.0",
+      "hashPath": "serilog.4.3.0.nupkg.sha512"
+    },
+    "Serilog.Sinks.Console/6.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-8jbqgjUyZlfCuSTaJk6lOca465OndqOz3KZP6Cryt/IqZYybyBu7GP0fE/AXBzrrQB3EBmQntBFAvMVz1COvAA==",
+      "path": "serilog.sinks.console/6.1.1",
+      "hashPath": "serilog.sinks.console.6.1.1.nupkg.sha512"
+    }
+  }
+}
