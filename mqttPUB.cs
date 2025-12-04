@@ -84,7 +84,7 @@ namespace Magent
 
                         SubscribedValues[topic] = payload;
 
-                        Console.WriteLine($"[SUB] {topic} → {payload}");
+                        //Console.WriteLine($"[SUB] {topic} → {payload}");
                     }
                     catch (Exception ex)
                     {
@@ -130,7 +130,7 @@ namespace Magent
 
                         SubscribedValues[topic] = payload;
 
-                        Console.WriteLine($"[SUB] {topic} → {payload}");
+                        //Console.WriteLine($"[SUB] {topic} → {payload}");
                     }
                     catch (Exception ex)
                     {
@@ -152,7 +152,93 @@ namespace Magent
                 .Build();
 
             await _mqttClient.SubscribeAsync(filter);
-            Console.WriteLine($"[MQTT] Subscrito a: {topic}");
+            //Console.WriteLine($"[MQTT] Subscrito a: {topic}");
+        }
+
+        public async Task DisconnectAsync()
+        {
+            try
+            {
+                if (_mqttClient != null)
+                {
+                    //Console.WriteLine("[MQTT] A desligar cliente...");
+
+                    // 1) Limpar handlers para evitar callbacks/reconexões
+                    _mqttClient.ConnectedHandler = null;
+                    _mqttClient.DisconnectedHandler = null;
+                    _mqttClient.ConnectingFailedHandler = null;
+                    _mqttClient.ApplicationMessageReceivedHandler = null;
+
+                    // 2) Parar o cliente, se estiver ativo
+                    if (_mqttClient.IsStarted)
+                    {
+                        await _mqttClient.StopAsync();
+                        //Console.WriteLine("[MQTT] StopAsync concluído.");
+                    }
+
+                    // 3) (Opcional) Libertar recursos do cliente
+                    //    Na tua versão só existe Dispose() síncrono
+                    if (_mqttClient is IDisposable disp)
+                    {
+                        disp.Dispose();
+                        //Console.WriteLine("[MQTT] Dispose concluído.");
+                    }
+
+                    // 4) Opcional: marcar como destruído
+                    // _mqttClient = null!;
+                    // options = null!;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro ao desconectar MQTT: {ex.Message}");
+            }
+        }
+
+        public void EndMQTTclient(string IP, int Port, string clientID)
+        {
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .Enrich.FromLogContext()
+                .WriteTo.Console()
+                .CreateLogger();
+
+            if (IP == null || Port == 0)
+            {
+                Console.WriteLine("Missing MQTT config!!!");
+                return;
+            }
+
+            var builder = new MqttClientOptionsBuilder()
+                .WithClientId(clientID)
+                .WithTcpServer(IP, Port);
+
+            options = new ManagedMqttClientOptionsBuilder()
+                .WithAutoReconnectDelay(TimeSpan.FromSeconds(60))
+                .WithClientOptions(builder.Build())
+                .Build();
+
+            _mqttClient.ConnectedHandler = new MqttClientConnectedHandlerDelegate(OnConnected);
+            _mqttClient.DisconnectedHandler = new MqttClientDisconnectedHandlerDelegate(OnDisconnected);
+            _mqttClient.ConnectingFailedHandler = new ConnectingFailedHandlerDelegate(OnConnectingFailed);
+
+            _mqttClient.ApplicationMessageReceivedHandler =
+                new MqttApplicationMessageReceivedHandlerDelegate(a =>
+                {
+                    try
+                    {
+                        var topic = a.ApplicationMessage.Topic;
+                        var payload = Encoding.UTF8.GetString(a.ApplicationMessage.Payload ?? Array.Empty<byte>());
+
+                        SubscribedValues[topic] = payload;
+
+                        //Console.WriteLine($"[SUB] {topic} → {payload}");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"[SUB] Erro ao processar mensagem: {ex.Message}");
+                    }
+                });
         }
 
         public void pubTopic(List<object[]> msg, string deviceType, string DeviceID, string manufacturerName, string serialNo, string beaconMsg)

@@ -8,38 +8,39 @@ class Program
     {
         var mqtt = new mqttPUB("TesteMQTT");
 
-        // 1) iniciar cliente (sem certificados)
-        mqtt.startMQTTclient("192.168.13.118", 1818, "EqnFleetTester");
-
-        // pequena pausa para estabilizar
-        Thread.Sleep(1000);
-
-        // 2) subscrever o tópico
-        string topic = "agv/subsystems/actuator/load-sensor/loaded";
-        await mqtt.Subscribe(topic);
-
-        Thread.Sleep(1000);
-
-        // 3) ler valor em loop
-        while (true)
+        try
         {
-            if (mqttPUB.SubscribedValues.TryGetValue(topic, out var val))
+            // 1) iniciar cliente (sem certificados)
+            mqtt.startMQTTclient("192.168.13.118", 1818, "EqnFleetTester");
+
+            string topic = "agv/subsystems/actuator/load-sensor/loaded";
+            await mqtt.Subscribe(topic);
+
+            while (true)
             {
-                Console.WriteLine($"[{topic}] = {val}");
+                if (mqttPUB.SubscribedValues.TryGetValue(topic, out var val))
+                {
+                    Console.WriteLine($"[{topic}] = {val}");
 
-                bool loaded = val == "true" || val == "1";
+                    bool loaded = val == "true" || val == "1";
 
-                if (loaded)
-                    Console.WriteLine("→ CARGA DETETADA NO SENSOR");
-                else
-                    Console.WriteLine("→ SEM CARGA");
+                    if (loaded)
+                    {
+                        await mqtt.DisconnectAsync();
+                        Console.WriteLine("→ CARGA DETETADA NO SENSOR");
+                        //return true;
+                        break;
+                    }
+                    else
+                        Console.WriteLine("→ SEM CARGA");
+                        //return false;
+                        break;
+                }
             }
-            else
-            {
-                Console.WriteLine("Ainda não chegou nenhuma mensagem para esse tópico.");
-            }
-
-            Thread.Sleep(1000);
+        }
+        finally
+        {
+            await mqtt.DisconnectAsync();
         }
     }
 }
