@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EqnFleetMQTTTest")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f569d4979ebb833adb6d972d967de6f2154f049d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dbf8a3291cde1399a7e9690dc28f1c9a114d6b99")]
 [assembly: System.Reflection.AssemblyProductAttribute("EqnFleetMQTTTest")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EqnFleetMQTTTest")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -15,6 +15,7 @@ class Program
 
             string topic = "agv/subsystems/actuator/load-sensor/loaded";
             await mqtt.Subscribe(topic);
+            Thread.Sleep(2000);
 
             while (true)
             {
